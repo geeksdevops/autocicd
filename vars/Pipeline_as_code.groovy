@@ -71,7 +71,7 @@ def call(body)
 	    }
         stage ('\u2779 Post-Build Tasks') {
            parallel (
-i/             "\u2460 Node Deploy" : {
+/             "\u2460 Node Deploy" : {
 	            def g = new s3lambda()
 	            g.s3Deploy("${BUCKET_NAME}")
 		NEXT_STAGE='validate_deploy'
