@@ -23,10 +23,7 @@ def call(body)
         def html = new htmlReport()
         currentBuild.result = "SUCCESS"
         NEXT_STAGE = "none"
-          //ENVIRONMENT = 'production'
           BRANCH = 'dev'
-          //BUCKET_NAME = 'lamdab.com.au'
-        
 	  stage ('\u2776 Code Checkout') {
           def g = new git()
           g.Checkout("${config.GIT_URL}","${BRANCH}","${config.GIT_CREDENTIALS}")
@@ -47,7 +44,7 @@ def call(body)
                  continue
                }
 	            g = new maven()
-	            g.mvnTestSkip("${config.MVN_SKIP_GOAL}")
+	            g.mvnTestSkip()
              },
              failFast: true
            )
@@ -92,7 +89,7 @@ def call(body)
      finally {
          def e = new email()
          String BODY = new File("${WORKSPACE}/${config.EMAIL_TEMPLATE}").text   
-         e.sendemail("${currentBuild.result}","$BODY","${config.RECIPIENT}","${ENVIRONMENT}")
+         e.sendemail("${currentBuild.result}","$BODY","${config.RECIPIENT}")
    }
   }
 }
