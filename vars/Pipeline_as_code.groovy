@@ -89,7 +89,7 @@ def call(body)
                 continue
                }
                 def e = new email()
-                e.sendDeployEmail("${config.BRANCH}","${ENVIRONMENT}")
+                e.sendDeployEmail("${config.BRANCH}, $BUILD_NAME")
             },
              failFast: true
           )
