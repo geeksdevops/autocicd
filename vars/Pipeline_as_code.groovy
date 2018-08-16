@@ -24,7 +24,7 @@ def call(body)
         currentBuild.result = "SUCCESS"
         NEXT_STAGE = "none"
           //ENVIRONMENT = 'production'
-          BRANCH = 'master'
+          BRANCH = 'dev'
           //BUCKET_NAME = 'lamdab.com.au'
         
 	  stage ('\u2776 Code Checkout') {
@@ -56,7 +56,7 @@ def call(body)
            parallel (
              "\u2460 Node Build" : {
                def g = new maven()
-                g.mvnBuild("${config.MAVEN_GOAL}")
+                g.mvnBuild("${config.MAVEN_GOAL}, ${config.MAVEN_HOME}")
                 NEXT_STAGE='code_analysis'
              },
              "\u2461 Code Analysis" : {

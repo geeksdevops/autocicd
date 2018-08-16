@@ -30,13 +30,13 @@ def createReportDirectory(String REPORT_DIRECTORY)
 /********************************************
 ** Function to Build Maven Project
 *********************************************/
-def mvnBuild(String MAVEN_GOAL)
+def mvnBuild(String MAVEN_HOME, String MAVEN_GOAL)
 {
    try {
       wrap([$class: 'AnsiColorBuildWrapper']) {
 	    println "\u001B[32mINFO => Building Maven build, please wait..."
 		sh """
-		   mvn $MAVEN_GOAL
+		   $MAVEN_HOME/bin/mvn $MAVEN_GOAL
 		"""
 	  }
    }
@@ -57,7 +57,7 @@ def mvnTestSkip(String MVN_SKIP_GOAL)
    try {
       wrap([$class: 'AnsiColorBuildWrapper']) {
 	    println "\u001B[32mINFO => Testing Maven build, please wait..."
-		sh "mvn $MVN_SKIP_GOAL"
+		sh "$MAVEN_HOME/bin/mvn $MVN_SKIP_GOAL"
 		currentBuild.result = 'SUCCESS'
 		step([$class: 'StashNotifier'])
 	  }
