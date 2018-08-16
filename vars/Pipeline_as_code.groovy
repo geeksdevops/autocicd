@@ -71,19 +71,6 @@ def call(body)
 	    }
         stage ('\u2779 Post-Build Tasks') {
            parallel (
-/             "\u2460 Node Deploy" : {
-	            def g = new s3lambda()
-	            g.s3Deploy("${BUCKET_NAME}")
-		NEXT_STAGE='validate_deploy'
-             },
-             "\u2461 Validate Deployment" : {
-                while(NEXT_STAGE != 'validate_deploy') {
-                  continue
-                }
-                def g = new s3lambda()
-                g.validateLambdaFunctions("${config.LAMBDA_VALIDATION_SCRIPT}","${ENVIRONMENT}")
-                NEXT_STAGE='send_alert'
-             },   ***/
              "\u2462 Deployment Alert" : {
                while(NEXT_STAGE != 'send_alert') {
                 continue
