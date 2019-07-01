@@ -72,8 +72,8 @@ def call(body)
                while(NEXT_STAGE != 'send_alert') {
                 continue
                }
-                def e = new email()
-                e.sendDeployEmail("${config.BRANCH}, $BUILD_NAME")
+//                def e = new email()
+//                e.sendDeployEmail("${config.BRANCH}, $BUILD_NAME")
             },
              failFast: true
           )
@@ -87,7 +87,7 @@ def call(body)
         }
      }
      finally {
-         def e = new email()
+         //def e = new email()
          String BODY = new File("${WORKSPACE}/${config.EMAIL_TEMPLATE}").text   
          e.sendemail("${currentBuild.result}","$BODY","${config.RECIPIENT}")
    }
