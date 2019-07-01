@@ -66,18 +66,18 @@ def call(body)
              failFast: true
            )
 	    }
-//       stage ('\u2779 Post-Build Tasks') {
-//           parallel (
-//             "\u2462 Deployment Alert" : {
-//               while(NEXT_STAGE != 'send_alert') {
-//                continue
-//               }
-//                def e = new email()
-//                e.sendDeployEmail("${config.BRANCH}, $BUILD_NAME")
-//            },
-//           failFast: true
-//        )
-//        }
+      stage ('\u2779 Post-Build Tasks') {
+           parallel (
+             "\u2462 Deployment Alert" : {
+               while(NEXT_STAGE != 'send_alert') {
+                continue
+               }
+                def e = new email()
+                e.sendDeployEmail("${config.BRANCH}, $BUILD_NAME")
+            },
+           failFast: true
+        )
+        }
      }
      catch (Exception caughtError) {
         wrap([$class: 'AnsiColorBuildWrapper']) {
@@ -87,10 +87,9 @@ def call(body)
         }
      }
      finally {
-         //def e = new email()
-//         String BODY = new File("${WORKSPACE}/${config.EMAIL_TEMPLATE}").text   
-//         e.sendemail("${currentBuild.result}","$BODY","${config.RECIPIENT}")
+         def e = new email()
+         String BODY = new File("${WORKSPACE}/${config.EMAIL_TEMPLATE}").text   
+         e.sendemail("${currentBuild.result}","$BODY","${config.RECIPIENT}")
     }
   }
 }
-
