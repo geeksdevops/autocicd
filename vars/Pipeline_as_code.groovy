@@ -51,7 +51,7 @@ def call(body)
 	    }
        stage ('\u2778 Build Tasks') {
            parallel (
-             "\u2460 Mave Build" : {
+             "\u2460 Maven Build" : {
                def g = new maven()
                 g.mvnBuild("${config.MAVEN_GOAL}, ${config.MAVEN_HOME}")
                 NEXT_STAGE='code_analysis'
