@@ -89,7 +89,7 @@ def call(body)
      finally {
          //def e = new email()
          String BODY = new File("${WORKSPACE}/${config.EMAIL_TEMPLATE}").text   
-         e.sendemail("${currentBuild.result}","$BODY","${config.RECIPIENT}")
+//         e.sendemail("${currentBuild.result}","$BODY","${config.RECIPIENT}")
    }
   }
 }
